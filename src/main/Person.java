@@ -4,7 +4,12 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
 
-public class Person {
+public class Person implements CheckPerson{
+
+        @Override
+        public boolean test(Person p) {
+                return false;
+        }
 
         public enum Sex {
             MALE, FEMALE
@@ -28,14 +33,14 @@ public class Person {
                 return this.getAge();
         };
 
-        static class Criteria implements CheckPerson{
-                public boolean test(Person p){
-                        return p.getAge() > 90;
-                }
-        }
-
         public int printPersons(List<Person> roster, CheckPerson tester) {
                 for (Person p : roster) {
+                        Person person = new Person(){
+                                public boolean test(Person p){
+                                        return p.getAge() > 90;
+                                }
+                        };
+                        tester = person;
                         if (tester.test(p)) {
                                 return p.printPerson();
                         }

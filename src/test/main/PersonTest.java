@@ -21,7 +21,7 @@ public class PersonTest {
     dave.gender = MALE;
     dave.emailAddress = "dave@dave.dave";
     int expected = 909;
-    int actual = dave.printPersons(testRoster, new Person.Criteria());
+    int actual = dave.printPersons(testRoster, new Person());
     Assert.assertEquals(expected,actual);
 
     }
