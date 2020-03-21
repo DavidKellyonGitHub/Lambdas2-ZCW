@@ -24,7 +24,7 @@ public class Person implements CheckPerson{
                 return Period.between(birthday,LocalDate.now()).getYears();
         }
 
-        interface Checkperson {
+        interface CheckPerson {
                 boolean test(Person p);
         }
 
@@ -33,14 +33,12 @@ public class Person implements CheckPerson{
                 return this.getAge();
         };
 
-        public int printPersons(List<Person> roster, CheckPerson tester) {
+        public CheckPerson isSenior = p -> p.getAge() > 90;
+
+
+        public int printPersons(List<Person> roster) {
                 for (Person p : roster) {
-                        Person person = new Person(){
-                                public boolean test(Person p){
-                                        return p.getAge() > 90;
-                                }
-                        };
-                        tester = person;
+                        CheckPerson tester = isSenior;
                         if (tester.test(p)) {
                                 return p.printPerson();
                         }
